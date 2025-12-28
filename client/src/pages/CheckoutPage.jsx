@@ -83,67 +83,85 @@ const CheckoutPage = () => {
     }
   }
   return (
-    <section className='bg-blue-50'>
-      <div className='container mx-auto p-4 flex flex-col lg:flex-row w-full gap-5 justify-between'>
-        <div className='w-full'>
-          {/***address***/}
-          <h3 className='text-lg font-semibold'>Choose your address</h3>
-          <div className='bg-white p-2 grid gap-4'>
-            {
-              addressList.map((address, index) => {
-                return (
-                  <label htmlFor={"address" + index} className={!address.status && "hidden"}>
-                    <div className='border rounded p-3 flex gap-3 hover:bg-blue-50'>
-                      <div>
-                        <input id={"address" + index} type='radio' value={index} onChange={(e) => setSelectAddress(e.target.value)} name='address' />
+    <section className='bg-gray-50 min-h-[calc(100vh-100px)] py-8 px-4'>
+      <div className='max-w-6xl mx-auto flex flex-col lg:flex-row gap-8'>
+        {/* Left Side: Address Selection */}
+        <div className='flex-1'>
+          <h3 className='text-xl font-bold text-gray-800 mb-4'>Choose Delivery Address</h3>
+          <div className='bg-white p-6 rounded-2xl shadow-sm border border-gray-100'>
+            <div className='grid gap-4 md:grid-cols-2'>
+              {
+                addressList.map((address, index) => {
+                  return (
+                    <label key={"address" + index} htmlFor={"address" + index} className={`relative block cursor-pointer group ${!address.status && "hidden"}`}>
+                      <input id={"address" + index} type='radio' value={index} onChange={(e) => setSelectAddress(e.target.value)} name='address' className='peer sr-only' checked={selectAddress == index} />
+                      <div className='p-4 rounded-xl border-2 border-transparent bg-gray-50 peer-checked:border-primary-200 peer-checked:bg-primary-50/30 peer-checked:shadow-md transition-all h-full'>
+                        <div className='flex gap-3'>
+                             <div className={`mt-1 w-5 h-5 rounded-full border-2 flex items-center justify-center ${selectAddress == index ? 'border-primary-200' : 'border-gray-300'}`}>
+                                {selectAddress == index && <div className='w-2.5 h-2.5 rounded-full bg-primary-200'/>}
+                             </div>
+                            <div className='space-y-1 text-sm'>
+                                <p className='font-semibold text-gray-800'>{address.address_line}</p>
+                                <p className='text-gray-600'>{address.city}, {address.state}</p>
+                                <p className='text-gray-600'>{address.country} - {address.pincode}</p>
+                                <p className='text-gray-600 font-medium pt-1'>Mobile: {address.mobile}</p>
+                            </div>
+                        </div>
                       </div>
-                      <div>
-                        <p>{address.address_line}</p>
-                        <p>{address.city}</p>
-                        <p>{address.state}</p>
-                        <p>{address.country} - {address.pincode}</p>
-                        <p>{address.mobile}</p>
-                      </div>
-                    </div>
-                  </label>
-                )
-              })
-            }
-            <div onClick={() => setOpenAddress(true)} className='h-16 bg-blue-50 border-2 border-dashed flex justify-center items-center cursor-pointer'>
-              Add address
+                    </label>
+                  )
+                })
+              }
+              <div onClick={() => setOpenAddress(true)} className='h-full min-h-[160px] bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl flex flex-col justify-center items-center cursor-pointer hover:border-primary-200 hover:bg-primary-50/20 transition-all group'>
+                 <div className='w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform'>
+                    <span className='text-2xl text-gray-400 group-hover:text-primary-200'>+</span>
+                 </div>
+                 <span className='text-gray-500 font-medium group-hover:text-primary-200'>Add New Address</span>
+              </div>
             </div>
           </div>
-
-
-
         </div>
 
-        <div className='w-full max-w-md bg-white py-4 px-2'>
-          {/**summary**/}
-          <h3 className='text-lg font-semibold'>Summary</h3>
-          <div className='bg-white p-4'>
-            <h3 className='font-semibold'>Bill details</h3>
-            <div className='flex gap-4 justify-between ml-1'>
-              <p>Items total</p>
-              <p className='flex items-center gap-2'><span className='line-through text-neutral-400'>{DisplayPriceInRupees(notDiscountTotalPrice)}</span><span>{DisplayPriceInRupees(totalPrice)}</span></p>
-            </div>
-            <div className='flex gap-4 justify-between ml-1'>
-              <p>Quntity total</p>
-              <p className='flex items-center gap-2'>{totalQty} item</p>
-            </div>
-            <div className='flex gap-4 justify-between ml-1'>
-              <p>Delivery Charge</p>
-              <p className='flex items-center gap-2'>Free</p>
-            </div>
-            <div className='font-semibold flex items-center justify-between gap-4'>
-              <p >Grand total</p>
-              <p>{DisplayPriceInRupees(totalPrice)}</p>
-            </div>
-          </div>
-          <div className='w-full flex flex-col gap-4'>
-            <button className='py-2 px-4 bg-green-600 hover:bg-green-700 rounded text-white font-semibold' onClick={handleOnlinePayment}>Online Payment</button>
+        {/* Right Side: Order Summary */}
+        <div className='w-full lg:w-[380px]'>
+          <h3 className='text-xl font-bold text-gray-800 mb-4'>Order Summary</h3>
+          <div className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden sticky top-24'>
+             <div className='p-6 space-y-4'>
+                <h3 className='font-semibold text-gray-800 mb-4'>Bill Details</h3>
+                
+                <div className='flex justify-between text-gray-600'>
+                  <p>Item Total</p>
+                  <div className='flex items-center gap-2'>
+                      <span className='line-through text-gray-400 text-sm'>{DisplayPriceInRupees(notDiscountTotalPrice)}</span>
+                      <span className='font-medium text-gray-800'>{DisplayPriceInRupees(totalPrice)}</span>
+                  </div>
+                </div>
+                
+                <div className='flex justify-between text-gray-600'>
+                  <p>Total Quantity</p>
+                  <p className='font-medium text-gray-800'>{totalQty} items</p>
+                </div>
 
-            <button className='py-2 px-4 border-2 border-green-600 font-semibold text-green-600 hover:bg-green-600 hover:text-white' onClick={handleCashOnDelivery}>Cash on Delivery</button>
+                <div className='flex justify-between text-gray-600'>
+                  <p>Delivery Charge</p>
+                  <p className='text-green-600 font-medium'>Free</p>
+                </div>
+                
+                <div className='my-4 border-t border-gray-100 pt-4 flex justify-between items-center'>
+                  <p className='font-bold text-lg text-gray-800'>Grand Total</p>
+                  <p className='font-bold text-lg text-primary-200'>{DisplayPriceInRupees(totalPrice)}</p>
+                </div>
+             </div>
+
+             <div className='p-4 bg-gray-50 space-y-3'>
+                <button className='w-full py-3.5 px-4 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold shadow-lg shadow-green-600/20 transition-all transform hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center gap-2' onClick={handleOnlinePayment}>
+                    Online Payment
+                </button>
+
+                <button className='w-full py-3.5 px-4 bg-white border-2 border-gray-200 text-gray-700 hover:border-gray-800 hover:text-gray-900 rounded-xl font-bold transition-all active:scale-[0.98]' onClick={handleCashOnDelivery}>
+                    Cash on Delivery
+                </button>
+             </div>
           </div>
         </div>
       </div>

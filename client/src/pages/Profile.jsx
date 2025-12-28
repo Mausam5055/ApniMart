@@ -66,77 +66,85 @@ const Profile = () => {
 
     }
   return (
-    <div className='p-4'>
+    <div className='p-4 min-h-[calc(100vh-100px)] flex items-start justify-center bg-gray-50'>
+        <div className='w-full max-w-lg bg-white p-8 rounded-2xl shadow-xl border border-gray-100'>
+            {/**profile upload and display image */}
+            <div className='flex flex-col items-center mb-8 relative'>
+                <div className='w-32 h-32 bg-gray-100 rounded-full overflow-hidden border-4 border-white shadow-lg relative group'>
+                    {
+                        user.avatar ? (
+                            <img 
+                            alt={user.name}
+                            src={user.avatar}
+                            className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-300'
+                            />
+                        ) : (
+                            <div className='w-full h-full flex items-center justify-center text-gray-300'>
+                                <FaRegUserCircle size={80}/>
+                            </div>
+                        )
+                    }
+                    <button onClick={()=>setProfileAvatarEdit(true)} className='absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs py-1.5 opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm'>
+                        Change
+                    </button>
+                </div>
+            </div>
 
-        {/**profile upload and display image */}
-        <div className='w-20 h-20 bg-red-500 flex items-center justify-center rounded-full overflow-hidden drop-shadow-sm'>
+            
             {
-                user.avatar ? (
-                    <img 
-                      alt={user.name}
-                      src={user.avatar}
-                      className='w-full h-full'
-                    />
-                ) : (
-                    <FaRegUserCircle size={65}/>
+                openProfileAvatarEdit && (
+                    <UserProfileAvatarEdit close={()=>setProfileAvatarEdit(false)}/>
                 )
             }
+
+            {/**name, mobile , email, change password */}
+            <form className='grid gap-5' onSubmit={handleSubmit}>
+                <div className='grid gap-1.5'>
+                    <label className='text-sm font-semibold text-gray-600 ml-1'>Name</label>
+                    <input
+                        type='text'
+                        placeholder='Enter your name' 
+                        className='w-full p-3 bg-gray-50 outline-none border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-100 focus:border-primary-200 transition-all font-medium text-gray-800 placeholder:text-gray-400'
+                        value={userData.name}
+                        name='name'
+                        onChange={handleOnChange}
+                        required
+                    />
+                </div>
+                <div className='grid gap-1.5'>
+                    <label htmlFor='email' className='text-sm font-semibold text-gray-600 ml-1'>Email</label>
+                    <input
+                        type='email'
+                        id='email'
+                        placeholder='Enter your email' 
+                        className='w-full p-3 bg-gray-50 outline-none border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-100 focus:border-primary-200 transition-all font-medium text-gray-800 placeholder:text-gray-400'
+                        value={userData.email}
+                        name='email'
+                        onChange={handleOnChange}
+                        required
+                    />
+                </div>
+                <div className='grid gap-1.5'>
+                    <label htmlFor='mobile' className='text-sm font-semibold text-gray-600 ml-1'>Mobile</label>
+                    <input
+                        type='text'
+                        id='mobile'
+                        placeholder='Enter your mobile number' 
+                        className='w-full p-3 bg-gray-50 outline-none border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-100 focus:border-primary-200 transition-all font-medium text-gray-800 placeholder:text-gray-400'
+                        value={userData.mobile}
+                        name='mobile'
+                        onChange={handleOnChange}
+                        required
+                    />
+                </div>
+
+                <button className='mt-4 w-full bg-primary-200 hover:bg-primary-300 text-neutral-900 font-bold py-3.5 rounded-xl shadow-lg shadow-primary-200/20 hover:shadow-primary-200/40 transition-all transform hover:-translate-y-0.5 active:scale-[0.98]'>
+                    {
+                        loading ? "Updating..." : "Save Changes"
+                    }
+                </button>
+            </form>
         </div>
-        <button onClick={()=>setProfileAvatarEdit(true)} className='text-sm min-w-20 border border-primary-100 hover:border-primary-200 hover:bg-primary-200 px-3 py-1 rounded-full mt-3'>Edit</button>
-        
-        {
-            openProfileAvatarEdit && (
-                <UserProfileAvatarEdit close={()=>setProfileAvatarEdit(false)}/>
-            )
-        }
-
-        {/**name, mobile , email, change password */}
-        <form className='my-4 grid gap-4' onSubmit={handleSubmit}>
-            <div className='grid'>
-                <label>Name</label>
-                <input
-                    type='text'
-                    placeholder='Enter your name' 
-                    className='p-2 bg-blue-50 outline-none border focus-within:border-primary-200 rounded'
-                    value={userData.name}
-                    name='name'
-                    onChange={handleOnChange}
-                    required
-                />
-            </div>
-            <div className='grid'>
-                <label htmlFor='email'>Email</label>
-                <input
-                    type='email'
-                    id='email'
-                    placeholder='Enter your email' 
-                    className='p-2 bg-blue-50 outline-none border focus-within:border-primary-200 rounded'
-                    value={userData.email}
-                    name='email'
-                    onChange={handleOnChange}
-                    required
-                />
-            </div>
-            <div className='grid'>
-                <label htmlFor='mobile'>Mobile</label>
-                <input
-                    type='text'
-                    id='mobile'
-                    placeholder='Enter your mobile' 
-                    className='p-2 bg-blue-50 outline-none border focus-within:border-primary-200 rounded'
-                    value={userData.mobile}
-                    name='mobile'
-                    onChange={handleOnChange}
-                    required
-                />
-            </div>
-
-            <button className='border px-4 py-2 font-semibold hover:bg-primary-100 border-primary-100 text-primary-200 hover:text-neutral-800 rounded'>
-                {
-                    loading ? "Loading..." : "Submit"
-                }
-            </button>
-        </form>
     </div>
   )
 }
