@@ -260,6 +260,20 @@ This script will:
 - Upload images to Cloudinary.
 - Create database entries.
 
+### 6. (Optional) Seed Categories & SubCategories (Alternative)
+
+If you have a separate `Image` directory structure (Category/SubCategory images), you can use the `uploadData.js` utility.
+
+1. Ensure you have an `Image` folder at the project root with `category` and `sub category` subfolders.
+2. Run the script:
+
+```bash
+cd server/utils
+node uploadData.js
+```
+
+This will upload images and create the corresponding Category and SubCategory entries in MongoDB.
+
 ---
 
 ## 📡 API Documentation (Preview)
