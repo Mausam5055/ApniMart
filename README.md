@@ -35,7 +35,7 @@ Top-tier visual assets and design resources are available for this project.
 
 ## 🎥 Application Preview
 
-|      Desktop View      |      Mobile View       |
+|         Part 1         |         Part 2         |
 | :--------------------: | :--------------------: |
 | ![Demo 1](./demo1.gif) | ![Demo 2](./demo2.gif) |
 
