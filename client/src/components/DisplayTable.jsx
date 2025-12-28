@@ -16,14 +16,14 @@ const DisplayTable = ({ data, column }) => {
   })
 
   return (
-    <div className="p-2">
-    <table className='w-full py-0 px-0 border-collapse'>
-      <thead className='bg-black text-white'>
+    <div className="">
+    <table className='w-full text-left'>
+      <thead className='bg-gray-100 uppercase text-xs text-gray-700 font-semibold'>
         {table.getHeaderGroups().map(headerGroup => (
           <tr key={headerGroup.id}>
-            <th>Sr.No</th>
+            <th className='px-6 py-4 rounded-tl-lg'>Sr.No</th>
             {headerGroup.headers.map(header => (
-              <th key={header.id} className='border whitespace-nowrap'>
+              <th key={header.id} className='px-6 py-4 whitespace-nowrap first:rounded-tl-lg last:rounded-tr-lg'>
                 {header.isPlaceholder
                   ? null
                   : flexRender(
@@ -35,12 +35,12 @@ const DisplayTable = ({ data, column }) => {
           </tr>
         ))}
       </thead>
-      <tbody>
+      <tbody className='divide-y divide-gray-200'>
         {table.getRowModel().rows.map((row,index) => (
-          <tr key={row.id}>
-            <td className='border px-2 py-1 '>{index+1}</td>
+          <tr key={row.id} className='hover:bg-gray-50 transition-colors'>
+            <td className='px-6 py-4 font-medium text-gray-900'>{index+1}</td>
             {row.getVisibleCells().map(cell => (
-              <td key={cell.id} className='border px-2 py-1 whitespace-nowrap '>
+              <td key={cell.id} className='px-6 py-4 whitespace-nowrap text-gray-700'>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>
             ))}

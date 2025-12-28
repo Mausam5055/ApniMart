@@ -42,71 +42,81 @@ const AddAddress = ({close}) => {
         }
     }
   return (
-    <section className='bg-black fixed top-0 left-0 right-0 bottom-0 z-50 bg-opacity-70 h-screen overflow-auto'>
-        <div className='bg-white p-4 w-full max-w-lg mt-8 mx-auto rounded'>
-            <div className='flex justify-between items-center gap-4'>
-                <h2 className='font-semibold'>Add Address</h2>
-                <button onClick={close} className='hover:text-red-500'>
-                    <IoClose  size={25}/>
+    <section className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm overflow-auto p-4'>
+        <div className='bg-white p-6 w-full max-w-lg rounded-2xl shadow-2xl relative animate-fadeIn'>
+            <div className='flex justify-between items-center mb-6 pb-4 border-b border-gray-100'>
+                <h2 className='font-bold text-xl text-gray-800'>Add New Address</h2>
+                <button onClick={close} className='text-gray-400 hover:text-red-500 transition-colors p-1 rounded-full hover:bg-red-50'>
+                    <IoClose size={24}/>
                 </button>
             </div>
-            <form className='mt-4 grid gap-4' onSubmit={handleSubmit(onSubmit)}>
-                <div className='grid gap-1'>
-                    <label htmlFor='addressline'>Address Line :</label>
+            <form className='grid gap-4' onSubmit={handleSubmit(onSubmit)}>
+                <div className='grid gap-1.5'>
+                    <label htmlFor='addressline' className='text-sm font-medium text-gray-700'>Address Line</label>
                     <input
                         type='text'
                         id='addressline' 
-                        className='border bg-blue-50 p-2 rounded'
+                        placeholder='Enter your address'
+                        className='bg-gray-50 border border-gray-200 p-2.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-transparent transition-all'
                         {...register("addressline",{required : true})}
                     />
                 </div>
-                <div className='grid gap-1'>
-                    <label htmlFor='city'>City :</label>
-                    <input
-                        type='text'
-                        id='city' 
-                        className='border bg-blue-50 p-2 rounded'
-                        {...register("city",{required : true})}
-                    />
+                <div className='grid grid-cols-2 gap-4'>
+                    <div className='grid gap-1.5'>
+                        <label htmlFor='city' className='text-sm font-medium text-gray-700'>City</label>
+                        <input
+                            type='text'
+                            id='city' 
+                            placeholder='City'
+                            className='bg-gray-50 border border-gray-200 p-2.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-transparent transition-all'
+                            {...register("city",{required : true})}
+                        />
+                    </div>
+                    <div className='grid gap-1.5'>
+                        <label htmlFor='state' className='text-sm font-medium text-gray-700'>State</label>
+                        <input
+                            type='text'
+                            id='state' 
+                             placeholder='State'
+                            className='bg-gray-50 border border-gray-200 p-2.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-transparent transition-all'
+                            {...register("state",{required : true})}
+                        />
+                    </div>
                 </div>
-                <div className='grid gap-1'>
-                    <label htmlFor='state'>State :</label>
-                    <input
-                        type='text'
-                        id='state' 
-                        className='border bg-blue-50 p-2 rounded'
-                        {...register("state",{required : true})}
-                    />
+                 <div className='grid grid-cols-2 gap-4'>
+                    <div className='grid gap-1.5'>
+                        <label htmlFor='pincode' className='text-sm font-medium text-gray-700'>Pincode</label>
+                        <input
+                            type='text'
+                            id='pincode' 
+                            placeholder='Zip Code'
+                            className='bg-gray-50 border border-gray-200 p-2.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-transparent transition-all'
+                            {...register("pincode",{required : true})}
+                        />
+                    </div>
+                     <div className='grid gap-1.5'>
+                        <label htmlFor='country' className='text-sm font-medium text-gray-700'>Country</label>
+                        <input
+                            type='text'
+                            id='country' 
+                            placeholder='Country'
+                            className='bg-gray-50 border border-gray-200 p-2.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-transparent transition-all'
+                            {...register("country",{required : true})}
+                        />
+                    </div>
                 </div>
-                <div className='grid gap-1'>
-                    <label htmlFor='pincode'>Pincode :</label>
-                    <input
-                        type='text'
-                        id='pincode' 
-                        className='border bg-blue-50 p-2 rounded'
-                        {...register("pincode",{required : true})}
-                    />
-                </div>
-                <div className='grid gap-1'>
-                    <label htmlFor='country'>Country :</label>
-                    <input
-                        type='text'
-                        id='country' 
-                        className='border bg-blue-50 p-2 rounded'
-                        {...register("country",{required : true})}
-                    />
-                </div>
-                <div className='grid gap-1'>
-                    <label htmlFor='mobile'>Mobile No. :</label>
+                <div className='grid gap-1.5'>
+                    <label htmlFor='mobile' className='text-sm font-medium text-gray-700'>Mobile No.</label>
                     <input
                         type='text'
                         id='mobile' 
-                        className='border bg-blue-50 p-2 rounded'
+                        placeholder='Enter mobile number'
+                        className='bg-gray-50 border border-gray-200 p-2.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-transparent transition-all'
                         {...register("mobile",{required : true})}
                     />
                 </div>
 
-                <button type='submit' className='bg-primary-200 w-full  py-2 font-semibold mt-4 hover:bg-primary-100'>Submit</button>
+                <button type='submit' className='bg-primary-200 text-white w-full py-3 rounded-lg font-semibold mt-4 hover:bg-primary-100 hover:shadow-lg transition-all transform active:scale-95 duration-200'>Save Address</button>
             </form>
         </div>
     </section>

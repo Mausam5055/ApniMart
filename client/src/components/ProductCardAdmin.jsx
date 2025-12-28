@@ -38,19 +38,22 @@ const ProductCardAdmin = ({ data, fetchProductData }) => {
     }
   }
   return (
-    <div className='w-36 p-4 bg-white rounded'>
-        <div>
+    <div className='w-full bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden group hover:shadow-md transition-shadow duration-300 flex flex-col'>
+        <div className='h-36 w-full bg-gray-50 flex items-center justify-center p-4 overflow-hidden relative'>
             <img
                src={data?.image[0]}  
                alt={data?.name}
-               className='w-full h-full object-scale-down'
+               className='w-full h-full object-scale-down group-hover:scale-105 transition-transform duration-300'
             />
         </div>
-        <p className='text-ellipsis line-clamp-2 font-medium'>{data?.name}</p>
-        <p className='text-slate-400'>{data?.unit}</p>
-        <div className='grid grid-cols-2 gap-3 py-2'>
-          <button onClick={()=>setEditOpen(true)} className='border px-1 py-1 text-sm border-green-600 bg-green-100 text-green-800 hover:bg-green-200 rounded'>Edit</button>
-          <button onClick={()=>setOpenDelete(true)} className='border px-1 py-1 text-sm border-red-600 bg-red-100 text-red-600 hover:bg-red-200 rounded'>Delete</button>
+        <div className='p-3 flex flex-col flex-1'>
+            <p className='text-gray-800 font-medium text-sm line-clamp-2 min-h-[2.5em] mb-1' title={data?.name}>{data?.name}</p>
+            <p className='text-gray-400 text-xs mb-3'>{data?.unit}</p>
+            
+            <div className='grid grid-cols-2 gap-2 mt-auto'>
+              <button onClick={()=>setEditOpen(true)} className='border border-green-200 bg-green-50 text-green-700 text-xs py-1.5 rounded-lg hover:bg-green-100 transition-colors font-medium'>Edit</button>
+              <button onClick={()=>setOpenDelete(true)} className='border border-red-200 bg-red-50 text-red-700 text-xs py-1.5 rounded-lg hover:bg-red-100 transition-colors font-medium'>Delete</button>
+            </div>
         </div>
 
         {
@@ -61,18 +64,18 @@ const ProductCardAdmin = ({ data, fetchProductData }) => {
 
         {
           openDelete && (
-            <section className='fixed top-0 left-0 right-0 bottom-0 bg-neutral-600 z-50 bg-opacity-70 p-4 flex justify-center items-center '>
-                <div className='bg-white p-4 w-full max-w-md rounded-md'>
-                    <div className='flex items-center justify-between gap-4'>
-                        <h3 className='font-semibold'>Permanent Delete</h3>
-                        <button onClick={()=>setOpenDelete(false)}>
-                          <IoClose size={25}/>
+            <section className='fixed top-0 left-0 right-0 bottom-0 bg-neutral-900 z-50 bg-opacity-60 backdrop-blur-sm p-4 flex justify-center items-center '>
+                <div className='bg-white p-6 w-full max-w-sm rounded-xl shadow-2xl animate-fadeIn'>
+                    <div className='flex items-center justify-between gap-4 mb-4'>
+                        <h3 className='font-bold text-lg text-gray-800'>Delete Product</h3>
+                        <button onClick={()=>setOpenDelete(false)} className="text-gray-400 hover:text-gray-600">
+                          <IoClose size={24}/>
                         </button>
                     </div>
-                    <p className='my-2'>Are you sure want to delete permanent ?</p>
-                    <div className='flex justify-end gap-5 py-4'>
-                      <button onClick={handleDeleteCancel} className='border px-3 py-1 rounded bg-red-100 border-red-500 text-red-500 hover:bg-red-200'>Cancel</button>
-                      <button onClick={handleDelete} className='border px-3 py-1 rounded bg-green-100 border-green-500 text-green-500 hover:bg-green-200'>Delete</button>
+                    <p className='text-gray-600 text-sm mb-6'>Are you sure want to permanently delete this product? This action cannot be undone.</p>
+                    <div className='flex justify-end gap-3'>
+                      <button onClick={handleDeleteCancel} className='px-4 py-2.5 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 font-medium text-sm transition-colors'>Cancel</button>
+                      <button onClick={handleDelete} className='px-4 py-2.5 rounded-lg bg-red-600 text-white hover:bg-red-700 font-medium text-sm transition-colors shadow-sm'>Delete</button>
                     </div>
                 </div>
             </section>

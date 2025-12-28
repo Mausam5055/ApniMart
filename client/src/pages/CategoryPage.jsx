@@ -72,10 +72,12 @@ const CategoryPage = () => {
     }
 
   return (
-    <section className=''>
-        <div className='p-2   bg-white shadow-md flex items-center justify-between'>
-            <h2 className='font-semibold'>Category</h2>
-            <button onClick={()=>setOpenUploadCategory(true)} className='text-sm border border-primary-200 hover:bg-primary-200 px-3 py-1 rounded'>Add Category</button>
+    <section className='p-4 max-w-7xl mx-auto'>
+        <div className='bg-white shadow-sm p-5 rounded-xl flex items-center justify-between border border-gray-100 mb-6'>
+            <h2 className='font-bold text-xl text-gray-800 tracking-tight'>Category</h2>
+            <button onClick={()=>setOpenUploadCategory(true)} className='text-sm border border-primary-200 text-primary-200 hover:bg-primary-50 px-4 py-2 rounded-full font-medium transition-colors duration-200'>
+                + Add Category
+            </button>
         </div>
         {
             !categoryData[0] && !loading && (
@@ -83,29 +85,34 @@ const CategoryPage = () => {
             )
         }
 
-        <div className='p-4 grid  grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2'>
+        <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6'>
             {
                 categoryData.map((category,index)=>{
                     return(
-                        <div className='w-32 h-56 rounded shadow-md' key={category._id}>
-                            <img 
-                                alt={category.name}
-                                src={category.image}
-                                className='w-full object-scale-down'
-                            />
-                            <div className='items-center h-9 flex gap-2'>
-                                <button onClick={()=>{
-                                    setOpenEdit(true)
-                                    setEditData(category)
-                                }} className='flex-1 bg-green-100 hover:bg-green-200 text-green-600 font-medium py-1 rounded'>
-                                    Edit
-                                </button>
-                                <button onClick={()=>{
-                                    setOpenConfirmBoxDelete(true)
-                                    setDeleteCategory(category)
-                                }} className='flex-1 bg-red-100 hover:bg-red-200 text-red-600 font-medium py-1 rounded'>
-                                    Delete
-                                </button>
+                        <div className='group bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col' key={category._id}>
+                            <div className='w-full h-40 bg-gray-50 flex items-center justify-center overflow-hidden p-4'>
+                                <img 
+                                    alt={category.name}
+                                    src={category.image}
+                                    className='w-full h-full object-scale-down group-hover:scale-110 transition-transform duration-300'
+                                />
+                            </div>
+                            <div className='p-3 flex-1 flex flex-col'>
+                                <h3 className='font-medium text-gray-800 mb-3 truncate text-center'>{category.name}</h3>
+                                <div className='flex gap-2 mt-auto'>
+                                    <button onClick={()=>{
+                                        setOpenEdit(true)
+                                        setEditData(category)
+                                    }} className='flex-1 bg-green-50 hover:bg-green-100 text-green-600 text-xs font-semibold py-1.5 rounded-lg transition-colors'>
+                                        Edit
+                                    </button>
+                                    <button onClick={()=>{
+                                        setOpenConfirmBoxDelete(true)
+                                        setDeleteCategory(category)
+                                    }} className='flex-1 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-semibold py-1.5 rounded-lg transition-colors'>
+                                        Delete
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     )
@@ -132,9 +139,9 @@ const CategoryPage = () => {
         }
 
         {
-           openConfimBoxDelete && (
+            openConfimBoxDelete && (
             <CofirmBox close={()=>setOpenConfirmBoxDelete(false)} cancel={()=>setOpenConfirmBoxDelete(false)} confirm={handleDeleteCategory}/>
-           ) 
+            ) 
         }
     </section>
   )
