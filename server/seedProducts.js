@@ -57,6 +57,12 @@ const processProduct = async (productPath, categoryId, subCategoryId) => {
     const dirName = path.basename(productPath);
     console.log(`Processing Product: ${dirName}`);
 
+    const existingProduct = await ProductModel.findOne({ name: dirName });
+    if (existingProduct) {
+        console.log(`  -> Product already exists: ${dirName} (Skipping)`);
+        return;
+    }
+
     const files = fs.readdirSync(productPath);
     let description = "";
     let price = 0;

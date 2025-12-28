@@ -255,7 +255,8 @@ node seedProducts.js
 
 This script will:
 
-- Iterate through Categories -> SubCategories -> Products.
+- Seed Categories and SubCategories first to ensure the correct structure exists.
+- Then seed Products into their respective folders.
 - Upload images to Cloudinary.
 - Create database entries.
 
