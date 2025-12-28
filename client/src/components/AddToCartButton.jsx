@@ -85,15 +85,15 @@ const AddToCartButton = ({ data }) => {
         <div className='w-full max-w-[150px]'>
             {
                 isAvailableCart ? (
-                    <div className='flex w-full h-full'>
-                        <button onClick={decreaseQty} className='bg-green-600 hover:bg-green-700 text-white flex-1 w-full p-1 rounded flex items-center justify-center'><FaMinus /></button>
+                    <div className='flex w-full h-full items-center bg-green-600 text-white rounded-full overflow-hidden shadow-md'>
+                        <button onClick={decreaseQty} className='bg-green-600 hover:bg-green-700 px-3 py-1 flex items-center justify-center transition-colors duration-200'><FaMinus size={12}/></button>
 
                         <p className='flex-1 w-full font-semibold px-1 flex items-center justify-center'>{qty}</p>
 
-                        <button onClick={increaseQty} className='bg-green-600 hover:bg-green-700 text-white flex-1 w-full p-1 rounded flex items-center justify-center'><FaPlus /></button>
+                        <button onClick={increaseQty} className='bg-green-600 hover:bg-green-700 px-3 py-1 flex items-center justify-center transition-colors duration-200'><FaPlus size={12}/></button>
                     </div>
                 ) : (
-                    <button onClick={handleADDTocart} className='bg-green-600 hover:bg-green-700 text-white px-2 lg:px-4 py-1 rounded'>
+                    <button onClick={handleADDTocart} className='bg-green-600 hover:bg-green-700 text-white px-4 py-1.5 rounded-full shadow-md transition-all duration-300 transform hover:scale-105 hover:shadow-lg w-full font-medium tracking-wide'>
                         {loading ? <Loading /> : "Add"}
                     </button>
                 )
