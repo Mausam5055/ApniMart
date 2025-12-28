@@ -55,6 +55,7 @@ Top-tier visual assets and design resources are available for this project.
 ### 🛡️ For Administrators
 
 - **Product Management**: CRUD operations for products, categories, and subcategories.
+- **Product Seeding**: Automated script to populate database from local directory structure with image upload.
 - **Order Dashboard**: View and manage order statuses.
 - **User Management**: Monitor user activity and details.
 
@@ -239,6 +240,24 @@ npm install
 npm run dev
 # Client runs on Port 5173
 ```
+
+### 5. (Optional) Seed Products
+
+To populate your database with products from a `product` directory:
+
+1.  Ensure your `product` folder is in the project root.
+2.  Run the seeding script:
+
+```bash
+cd server
+node seedProducts.js
+```
+
+This script will:
+
+- Iterate through Categories -> SubCategories -> Products.
+- Upload images to Cloudinary.
+- Create database entries.
 
 ---
 
