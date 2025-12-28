@@ -101,6 +101,8 @@ const seedData = async () => {
                              existingSub.category.push(category._id);
                              await existingSub.save();
                              console.log(`     - Linked existing SubCategory "${subName}" to "${catName}"`);
+                        } else {
+                             console.log(`     - SubCategory "${subName}" already exists and linked. Skipping.`);
                         }
                     } else {
                         // Upload

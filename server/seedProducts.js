@@ -106,14 +106,11 @@ const processSubCategory = async (subCatPath, categoryId) => {
     const subCatName = path.basename(subCatPath);
     console.log(`Processing SubCategory: ${subCatName}`);
 
-    // Check if SubCategory exists or create
+    // Check if SubCategory exists ONLY
     let subCat = await SubCategoryModel.findOne({ name: subCatName });
     if (!subCat) {
-        subCat = new SubCategoryModel({
-            name: subCatName,
-            category: [categoryId]
-        });
-        await subCat.save();
+        console.log(`  -> SubCategory "${subCatName}" NOT found in DB. Skipping products for this subcategory.`);
+        return; 
     }
 
     // Iterate items (could be Products directly or further folders?)
@@ -133,11 +130,8 @@ const processCategory = async (catPath) => {
 
     let category = await CategoryModel.findOne({ name: catName });
     if (!category) {
-        category = new CategoryModel({
-             name: catName,
-             // image: ... // Could extract a representative image if needed
-        });
-        await category.save();
+        console.log(`  -> Category "${catName}" NOT found in DB. Skipping.`);
+        return;
     }
 
     const items = fs.readdirSync(catPath, { withFileTypes: true });
