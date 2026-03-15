@@ -27,8 +27,9 @@ const DisplayCartItem = ({close}) => {
         toast("Please Login")
     }
   return (
-    <section className='bg-neutral-900 fixed top-0 bottom-0 right-0 left-0 bg-opacity-70 z-50'>
-        <div className='bg-white w-full max-w-sm min-h-screen max-h-screen ml-auto'>
+    <section className=''>
+        <div onClick={close} className='bg-neutral-900 fixed top-0 bottom-0 right-0 left-0 bg-opacity-70 z-50 backdrop-blur-sm'></div>
+        <div className='bg-white fixed top-0 bottom-0 right-0 w-full max-w-sm min-h-screen max-h-screen z-50 ml-auto flex flex-col'>
             <div className='flex items-center p-4 shadow-md gap-3 justify-between'>
                 <h2 className='font-semibold'>Cart</h2>
                 <Link to={"/"} className='lg:hidden'>
@@ -39,7 +40,7 @@ const DisplayCartItem = ({close}) => {
                 </button>
             </div>
 
-            <div className='min-h-[75vh] lg:min-h-[80vh] h-full max-h-[calc(100vh-150px)] bg-blue-50 p-2 flex flex-col gap-4'>
+            <div className='flex-1 bg-blue-50 p-2 flex flex-col gap-4 overflow-y-auto'>
                 {/***display items */}
                 {
                     cartItem[0] ? (
@@ -109,8 +110,8 @@ const DisplayCartItem = ({close}) => {
 
             {
                 cartItem[0] && (
-                    <div className='p-2'>
-                        <div className='bg-green-700 text-neutral-100 px-4 font-bold text-base py-4 static bottom-3 rounded flex items-center gap-4 justify-between'>
+                    <div className='p-2 bg-white flex-shrink-0'>
+                        <div className='bg-green-700 text-neutral-100 px-4 font-bold text-base py-4 rounded flex items-center gap-4 justify-between'>
                             <div>
                                 {DisplayPriceInRupees(totalPrice)}
                             </div>
