@@ -29,7 +29,7 @@ const DisplayCartItem = ({close}) => {
   return (
     <section className=''>
         <div onClick={close} className='bg-neutral-900 fixed top-0 bottom-0 right-0 left-0 bg-opacity-70 z-50 backdrop-blur-sm'></div>
-        <div className='bg-white fixed top-0 bottom-0 right-0 w-full max-w-sm min-h-screen max-h-screen z-50 ml-auto flex flex-col'>
+        <div className='bg-white fixed top-0 bottom-0 right-0 w-full max-w-sm z-50 ml-auto flex flex-col'>
             <div className='flex items-center p-4 shadow-md gap-3 justify-between'>
                 <h2 className='font-semibold'>Cart</h2>
                 <Link to={"/"} className='lg:hidden'>
